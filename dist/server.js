@@ -6,13 +6,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const path_1 = __importDefault(require("path"));
+const fs_1 = __importDefault(require("fs"));
 const routes_1 = require("./routes");
 const app = express_1.default();
 const PORT = process.env.PORT || 8000;
 app.use(cors_1.default());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
-app.use(express_1.default.static('./files'));
+const files = './files';
+if (!fs_1.default.existsSync(files)) {
+    fs_1.default.mkdirSync(files);
+}
+app.use(express_1.default.static(files));
 app.use('/select', routes_1.select);
 app.use('/search', routes_1.search);
 app.use('/genre', routes_1.genre);
