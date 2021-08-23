@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "outDir": "./dist",
+        "esModuleInterop": true,
+        "strict": true,
+        "watch":true,
+        "moduleResolution": "node"
+    },
+    "include": ["src/**/*"],
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts",
+        "client"
+    ]
+}
