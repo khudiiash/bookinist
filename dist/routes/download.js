@@ -28,6 +28,7 @@ const cheerio_1 = __importDefault(require("cheerio"));
 const flibusta = __importStar(require("flibusta-api"));
 const http_1 = __importDefault(require("http"));
 const fs_1 = __importDefault(require("fs"));
+const path_1 = __importDefault(require("path"));
 const isRu_1 = __importDefault(require("../utils/isRu"));
 const cyrillic_to_translit_js_1 = __importDefault(require("cyrillic-to-translit-js"));
 const ru = new cyrillic_to_translit_js_1.default();
@@ -39,7 +40,7 @@ function authorMatch(a, b) {
 function deleteFiles(title, formats, time = 60 * 60) {
     setTimeout(() => {
         for (let format of formats) {
-            fs_1.default.unlink(`../files/${title}.${format}`, () => console.log(`../files/${title}.${format} is deleted`));
+            fs_1.default.unlink(path_1.default.join(__dirname, '..', 'files', `${title}.${format}`), () => console.log(`${path_1.default.join(__dirname, '..', 'files', `${title}.${format}`)} is deleted`));
         }
     }, time * 1000);
 }
@@ -61,9 +62,9 @@ exports.default = express_1.Router().post('/', function (req, res) {
             }
             const id = book.id;
             const transTitle = ru.transform(book.title, '_');
-            const fb2 = fs_1.default.createWriteStream('../files/' + transTitle + '.fb2');
-            const mobi = fs_1.default.createWriteStream('../files/' + transTitle + '.mobi');
-            const epub = fs_1.default.createWriteStream('../files/' + transTitle + '.epub');
+            const fb2 = fs_1.default.createWriteStream(path_1.default.join(__dirname, '..', 'files', transTitle + '.fb2'));
+            const mobi = fs_1.default.createWriteStream(path_1.default.join(__dirname, '..', 'files', transTitle + '.mobi'));
+            const epub = fs_1.default.createWriteStream(path_1.default.join(__dirname, '..', 'files', transTitle + '.epub'));
             request_1.default.get(`${ORIGIN}/b/${id}/fb2`, (e, r, b) => {
                 http_1.default.get(r.request.uri.href, response => {
                     response.pipe(fb2);
@@ -119,7 +120,7 @@ exports.default = express_1.Router().post('/', function (req, res) {
                     const dl = $('#download a').first().attr('href');
                     const transTitle = ru.transform(reqTitle, "_");
                     const fileName = transTitle + '.' + extension;
-                    const file = fs_1.default.createWriteStream('../files/' + fileName);
+                    const file = fs_1.default.createWriteStream(path_1.default.join(__dirname, '..', 'files', fileName));
                     deleteFiles(transTitle, [extension]);
                     if (dl) {
                         http_1.default.get(dl, response => {

@@ -4,6 +4,7 @@ import cheerio from 'cheerio'
 import * as flibusta from 'flibusta-api'
 import http from 'http'
 import fs from 'fs'
+import path from 'path'
 import isRu from '../utils/isRu'
 import cyrillicToTranslit from 'cyrillic-to-translit-js'
 
@@ -19,7 +20,7 @@ function authorMatch(a:string,b:string):boolean {
 function deleteFiles(title: string, formats: string[], time: number = 60 * 60) { // Delete in 60 minutes
     setTimeout(() => {
         for (let format of formats) {
-            fs.unlink(`../files/${title}.${format}`, () => console.log(`../files/${title}.${format} is deleted`))
+            fs.unlink(path.join(__dirname, '..', 'files', `${title}.${format}`), () => console.log(`${path.join(__dirname, '..', 'files', `${title}.${format}`)} is deleted`))
         }
     }, time * 1000)
 }
@@ -42,9 +43,9 @@ export default Router().post('/', function (req: Request, res: Response) {
                 }
                 const id = book.id
                 const transTitle = ru.transform(book.title, '_')
-                const fb2 = fs.createWriteStream('../files/' + transTitle + '.fb2')
-                const mobi = fs.createWriteStream('../files/' + transTitle + '.mobi')
-                const epub = fs.createWriteStream('../files/' + transTitle + '.epub')
+                const fb2 = fs.createWriteStream(path.join(__dirname, '..', 'files', transTitle + '.fb2'))
+                const mobi = fs.createWriteStream(path.join(__dirname, '..', 'files', transTitle + '.mobi'))
+                const epub = fs.createWriteStream(path.join(__dirname, '..', 'files', transTitle + '.epub'))
 
                 request.get(`${ORIGIN}/b/${id}/fb2`, (e,r,b) => {
                     http.get(r.request.uri.href, response => {
@@ -101,7 +102,7 @@ export default Router().post('/', function (req: Request, res: Response) {
                     const dl = $('#download a').first().attr('href')
                     const transTitle = ru.transform(reqTitle, "_")
                     const fileName = transTitle + '.' + extension
-                    const file = fs.createWriteStream('../files/' + fileName)
+                    const file = fs.createWriteStream(path.join(__dirname, '..', 'files', fileName))
                     deleteFiles(transTitle, [extension])
                     if (dl) {
                         http.get(dl, response => {
