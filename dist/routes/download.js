@@ -39,7 +39,7 @@ function authorMatch(a, b) {
 function deleteFiles(title, formats, time = 30) {
     setTimeout(() => {
         for (let format of formats) {
-            fs_1.default.unlink(`src/files/${title}.${format}`, () => console.log(`src/files/${title}.${format} is deleted`));
+            fs_1.default.unlink(`../files/${title}.${format}`, () => console.log(`../files/${title}.${format} is deleted`));
         }
     }, time * 1000);
 }
@@ -61,9 +61,9 @@ exports.default = express_1.Router().post('/', function (req, res) {
             }
             const id = book.id;
             const transTitle = ru.transform(book.title, '_');
-            const fb2 = fs_1.default.createWriteStream('src/files/' + transTitle + '.fb2');
-            const mobi = fs_1.default.createWriteStream('src/files/' + transTitle + '.mobi');
-            const epub = fs_1.default.createWriteStream('src/files/' + transTitle + '.epub');
+            const fb2 = fs_1.default.createWriteStream('../files/' + transTitle + '.fb2');
+            const mobi = fs_1.default.createWriteStream('../files/' + transTitle + '.mobi');
+            const epub = fs_1.default.createWriteStream('../files/' + transTitle + '.epub');
             request_1.default.get(`${ORIGIN}/b/${id}/fb2`, (e, r, b) => {
                 http_1.default.get(r.request.uri.href, response => {
                     response.pipe(fb2);
@@ -119,7 +119,7 @@ exports.default = express_1.Router().post('/', function (req, res) {
                     const dl = $('#download a').first().attr('href');
                     const transTitle = ru.transform(reqTitle, "_");
                     const fileName = transTitle + '.' + extension;
-                    const file = fs_1.default.createWriteStream('src/files/' + fileName);
+                    const file = fs_1.default.createWriteStream('../files/' + fileName);
                     deleteFiles(transTitle, [extension]);
                     if (dl) {
                         http_1.default.get(dl, response => {

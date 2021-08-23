@@ -17,7 +17,7 @@ function authorMatch(a:string,b:string):boolean {
 function deleteFiles(title: string, formats: string[], time: number = 30) { // Delete in 60 seconds
     setTimeout(() => {
         for (let format of formats) {
-            fs.unlink(`src/files/${title}.${format}`, () => console.log(`src/files/${title}.${format} is deleted`))
+            fs.unlink(`../files/${title}.${format}`, () => console.log(`../files/${title}.${format} is deleted`))
         }
     }, time * 1000)
 }
@@ -40,9 +40,9 @@ export default Router().post('/', function (req: Request, res: Response) {
                 }
                 const id = book.id
                 const transTitle = ru.transform(book.title, '_')
-                const fb2 = fs.createWriteStream('src/files/' + transTitle + '.fb2')
-                const mobi = fs.createWriteStream('src/files/' + transTitle + '.mobi')
-                const epub = fs.createWriteStream('src/files/' + transTitle + '.epub')
+                const fb2 = fs.createWriteStream('../files/' + transTitle + '.fb2')
+                const mobi = fs.createWriteStream('../files/' + transTitle + '.mobi')
+                const epub = fs.createWriteStream('../files/' + transTitle + '.epub')
 
                 request.get(`${ORIGIN}/b/${id}/fb2`, (e,r,b) => {
                     http.get(r.request.uri.href, response => {
@@ -99,7 +99,7 @@ export default Router().post('/', function (req: Request, res: Response) {
                     const dl = $('#download a').first().attr('href')
                     const transTitle = ru.transform(reqTitle, "_")
                     const fileName = transTitle + '.' + extension
-                    const file = fs.createWriteStream('src/files/' + fileName)
+                    const file = fs.createWriteStream('../files/' + fileName)
                     deleteFiles(transTitle, [extension])
                     if (dl) {
                         http.get(dl, response => {
