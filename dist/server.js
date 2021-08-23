@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 8000;
 app.use(cors_1.default());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
-const files = './files';
+const files = path_1.default.join(__dirname, 'files');
 if (!fs_1.default.existsSync(files)) {
     fs_1.default.mkdirSync(files);
 }
