@@ -102,4 +102,16 @@ export default defineComponent({
   }
 }
 
+@media screen and (max-width: 600px) {
+    .downloads-loader-text {
+        width: 60px;
+        height: 60px;
+        top:0;
+    }
+     .downloads-loader-wheel {
+        width: 40px;
+        height: 40px;
+        margin-top:10px;
+    }
+}
 </style>

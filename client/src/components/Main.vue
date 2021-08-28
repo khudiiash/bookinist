@@ -1,9 +1,11 @@
 <template>
   <div class="main">
-    <h1 class='main-header'>Bookinist</h1>
-    <form v-on:submit.prevent v-on:input="input">
-        <input id='query'>
-    </form>
+    <div class="main-header">
+      <h1>Bookinist</h1>
+      <form v-on:submit.prevent v-on:input="input">
+          <input id='query'>
+      </form>
+    </div>
     <Loading/>
     <div class='search-result'>
       <div class='search-column' v-for="(n,index) in [1,2,3,4]" :key="n"> <SearchItem v-for="(book, i) in eachNth(store.state.searchResult, index, 4)"
@@ -42,10 +44,11 @@ export default defineComponent({
       return { store, eachNth }
   },
   mounted() {
-    const container =   document.querySelector('.search-result')
-    const main = document.querySelector('.main')
+    const container =   document.querySelector('.search-result') as HTMLInputElement
+    const input = document.querySelector('#query') as HTMLInputElement
+    const main = document.querySelector('.main') as HTMLInputElement
     const sections = Array.from(document.querySelectorAll('.search-column'))
-    console.log(sections)
+    const isMobile = window.innerWidth < window.innerHeight
     sections.forEach((section,i) => {if (i === 1 || i === 3) section.classList.add('center')})
 
     main?.addEventListener('scroll', () => {
@@ -54,16 +57,17 @@ export default defineComponent({
 
     gsap.timeline()
       .from('input', 1, {clipPath: 'inset(0 50% 0 50%)'})
-      .from('.header', 1, {y: 15, opacity: 0})
+      .from('.main-header', 1, {y: 15, opacity: 0})
+
     if (container) {
         container.addEventListener('scroll', function() {
           container.scrollLeft = 0
-          })
+        })
       }
-    const input = document.querySelector('#query') as HTMLInputElement
-    if (input) input.focus()
-
-   
+    if (input) { 
+      input.focus() 
+      if (isMobile)input.onclick = () => gsap.to('.main-header', .5, {marginTop: '17vh'})
+    }
     const gradient = new Gradient();
     gradient.initGradient("#gradient-canvas");
   
@@ -122,7 +126,12 @@ export default defineComponent({
   color: #000;
 }
 
-
+.main-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 46px;
+  font-weight: 900;
+  color: #000;
+}
 input {
   background: transparent;
   border: none;
@@ -174,16 +183,17 @@ input:focus {
   --gradient-color-3: #7038ff;  
   --gradient-color-4: #000000;
 
-
-
-
-
 }
 ::-webkit-scrollbar {
   display: none;
 }
-
-
-
+@media screen and (max-width: 600px) {
+  .main-header {
+    margin-top: 17vh;
+  }
+  input {
+      width: 330px;
+  }
+}
 
 </style>

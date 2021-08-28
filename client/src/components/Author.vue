@@ -57,7 +57,8 @@ export default defineComponent({
 
 .author {
   width: 100%;
-  height: fit-content;
+  height: 100%;
+  min-height: 117vh;
   padding-left: 2vw;
   font-weight: 500;
   opacity: 1;
@@ -185,7 +186,7 @@ export default defineComponent({
     margin-left: 0;
     width: 100%;
     padding: 40px 0;
-    white-space: nowrap;
+    text-align: left;
     border-top: 1px solid rgba(255, 255, 255, .1);
     border-bottom: 1px solid rgba(255, 255, 255, .1);
 }

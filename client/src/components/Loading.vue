@@ -167,11 +167,13 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style>
 .loading {
     position: fixed;
     right: 50px;
     bottom: 50px;
+    width: 100px;
+    height: 100px;
     transform: scale(.8);
     z-index: 37;
     pointer-events: none;
@@ -186,8 +188,10 @@ export default defineComponent({
 }
 @media screen and (max-width: 600px) {
     .loading {
-        right: 20px;
-        bottom: 20px;
+        right: 10px;
+        top: 0px;
+        bottom: 0;
+        transform: scale(.5);
     }
 }
 </style>

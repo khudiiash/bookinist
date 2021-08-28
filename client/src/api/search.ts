@@ -7,10 +7,14 @@ export const search = (query: string) => {
         .then(res => {
             if (store.state.shouldSearchAbort) return
             store.state.isLoading = false
+            const isMobile = window.innerWidth < window.innerHeight
             if (res?.data?.books && res?.data?.books?.length) {
                 const {books} = res.data
                 if (store.state.searchResult !== books) store.setSearchResult(books)
                 store.showSearchScreen()
+                if (isMobile) {
+                    gsap.to('.main-header', 1, {marginTop: '40px', ease: 'power2.inOut'})
+                }
             }
         })
         .catch(err => console.log(err))    

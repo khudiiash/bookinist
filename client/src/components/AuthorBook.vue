@@ -50,7 +50,7 @@ export default defineComponent({
   flex-direction: row;
   text-align: left;
   font-weight: 600;
-  width: 50%;
+  width: 200px;
   margin: 20px 0;
   height: 150px;
   border-bottom: 1px solid rgba(255, 255, 255, .1);

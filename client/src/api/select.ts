@@ -28,17 +28,12 @@ export const select = (props:SelectParam):void => {
         api.download({title, author, language: language})
         setTimeout(() => {
             gsap.set('.author-bio', {overflow: 'hidden'})
-            const headers = Array.from(document.querySelectorAll('.header'))     
+            const title = document.querySelector('.book-title') as HTMLElement
+            gsap.to('.book-title', title.innerText.length * .8, {scrollTo: {x: 'max'}, delay: 3, yoyo: true, repeat: -1, repeatDelay: 2, ease: 'none'})
             if (store.state.timelines.scrollHeaders) {
                 console.log('Killing previous scroll timeline')
                 store.state.timelines.scrollHeaders.kill()
-            }    
-            store.state.timelines.scrollHeaders = gsap.timeline()  
-            
-            headers.forEach((header:any) => {
-                console.log( header.innerText, header?.innerText.length * .1)
-                store.state.timelines.scrollHeaders.to(header, Math.round(header?.innerText.length * .1), {scrollTo: {x: 'max'}, ease: 'none', delay: 2, yoyo: true, repeat: -1, repeatDelay: 1}, '<')
-            })
+            }
             store.animateBookScreen()
         }, 100)
     })

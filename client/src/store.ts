@@ -21,6 +21,7 @@ const getters = reactive({
 const actions = {
     animateBookScreen() {
       state.timelines.showBook = gsap.timeline()
+         .to('.main', .5, {scrollTo: {y: 0}})
          .fromTo('.book-selected', {autoAlpha: 0}, {autoAlpha: 1, opacity: 1, scale: 1})
          .fromTo('.book-cover', .6, {opacity: 0, y: 35}, {scale: 1, opacity: 1, y: 0}, '<.1')
          .fromTo('.author-photo', .6, {scale: 0}, {scale: 1, opacity: 1, ease: 'back'}, '<.1')
@@ -28,25 +29,23 @@ const actions = {
          .fromTo('.author-bio, .book-description', .6, {opacity: 0, y: 15}, { scale: 1, opacity: 1, y: 0, stagger: .1}, '<.1')
     },
     hideBookScreen() {
-      state.timelines.hideBook = gsap.timeline()
+      return state.timelines.hideBookScreen = gsap.timeline()
          .to('.book-selected .book-cover', .3, {opacity: 0, y: 15})
          .to('.author-photo', .3, {opacity: 0, scale: .8}, '<.1')
          .to(['.author-name', '.book-title', '.book-year', '.info-header', '.similars-header'], .3, {opacity: 'inset(0 100% 0 0)', stagger: .2}, '<.1')
          .to('.author-bio, .book-description', .3, {opacity: 0, scale: .8}, '<.1')
          .to('.book-selected', .3, {autoAlpha: 0}, '<.1')
-
     },
     showSearchScreen() {
-      gsap.set('.search-column', {opacity: 0})
-      setTimeout(() => {
-        state.timelines.showSearch = gsap.timeline()
-          gsap.set('.search-result', {display: 'flex'})
-          gsap.set('.search-column', {opacity: 1})
-          gsap.fromTo('.search-column', 1, {y: '100vh'}, {y: 0, ease: 'power2.out', stagger: .1})
-      }, 100)
+      return state.timelines.showSearch = gsap.timeline()
+          .to('.main', .5, {scrollTo: {y: 0}})
+          .set('.search-result', {display: 'flex', autoAlpha: 1}, '<')
+          .set('.search-column', {opacity: 1})
+          .fromTo('.search-column', 1, {y: '100vh'}, {y: 0, ease: 'power2.out', stagger: .1})
     },
     hideSearchScreen() {
-        state.timelines.hideSearch = gsap.timeline()
+        return state.timelines.hideSearch = gsap.timeline()
+          .set('.search-column', {opacity: 0})
           .set('.search-result', {display: 'none'})
     },
     setAuthor(author: Author) {

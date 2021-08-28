@@ -5,6 +5,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import Main from './components/Main.vue';
+import ScrollToPlugin from "gsap/ScrollToPlugin";
+import gsap from 'gsap'
+gsap.registerPlugin(ScrollToPlugin)
 
 export default defineComponent({
   name: 'App',

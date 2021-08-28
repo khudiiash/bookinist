@@ -54,7 +54,7 @@ export default defineComponent({
   font-size: 30px;
   font-weight: 900;
   text-align: left;
-  margin-left: 15px;
+  margin-left: 16px;
   font-family: 'Playfair Display', serif;
   clip-path: inset(0 100% 0 0);
   border-top: 1px solid inherit;

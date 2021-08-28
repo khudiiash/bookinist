@@ -25,7 +25,6 @@ export default defineComponent({
     mounted() {
          watchEffect(() => {
            if (!store.state.book.genres?.length) return
-           console.log(store.state.book.genres)
            setTimeout(() => {
                 const genres = Array.from(document.querySelectorAll('.genres-item'))
                 gsap.fromTo('.genres-item', 1, {clipPath: 'inset(0% 100% 0% 0%)'}, {clipPath: 'inset(0% 0% 0% 0%)', stagger: .2})
@@ -52,9 +51,6 @@ export default defineComponent({
         requestGenre(event: Event) {
             const target: any = event.target
             const url:string = target.dataset.url
-            store.hideBookScreen()
-            gsap.to('.main', .5, {scrollTo: {y: 0}})
-
             api.genre(url)
         }
     }

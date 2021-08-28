@@ -11,9 +11,7 @@ import { defineComponent } from 'vue';
 import api from '../api'
 import store from '../store'
 import gsap from 'gsap'
-import ScrollToPlugin from "gsap/ScrollToPlugin";
 
-gsap.registerPlugin(ScrollToPlugin)
 export default defineComponent({
   name: 'Book',
   props: {
@@ -46,7 +44,6 @@ export default defineComponent({
           gsap.timeline()
             .to(`.search-result`, .2, {autoAlpha: 0}, '<')
             .to('.search-result', 0, {height: 0})
-      
       }
   }
 })
