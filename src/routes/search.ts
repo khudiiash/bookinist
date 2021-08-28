@@ -18,7 +18,6 @@ export default express.Router().post('/', (req: Request, res: Response) => {
                 const url = ORIGIN + $(item).find('.art-item__name a').first().attr('href')
                 const author = $(item).find('.art-item__author_label').first().text()
                 const cover = $(item).find('img.cover_img').first().attr('src')?.replace('cover_120', 'cover_330')
-                console.log({title, url, author, cover})
                 return {title, url, author, cover} as SearchBook
             })
             res.json({books})
