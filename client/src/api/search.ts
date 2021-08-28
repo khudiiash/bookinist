@@ -10,6 +10,7 @@ export const search = (query: string) => {
             const isMobile = window.innerWidth < window.innerHeight
             if (res?.data?.books && res?.data?.books?.length) {
                 const {books} = res.data
+                console.log(books.length)
                 if (store.state.searchResult !== books) store.setSearchResult(books)
                 store.showSearchScreen()
                 if (isMobile) {

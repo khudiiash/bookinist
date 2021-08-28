@@ -14,13 +14,15 @@ export default express.Router().post('/', (req: Request, res: Response) => {
             const $ = cheerio.load(body)
             const ORIGIN = 'https://www.litres.ru'
             const books = $('div[data-type="art"]').toArray().map((item, i) => {
-                if ($(item).find('.art-item__name art-item__name_audio').length) return null
+                
                 const title = $(item).find('.art-item__name a').first().text()
                 const url = ORIGIN + $(item).find('.art-item__name a').first().attr('href')
                 const author = $(item).find('.art-item__author_label').first().text()
                 const cover = $(item).find('img.cover_img').first().attr('src')?.replace('cover_120', 'cover_330')
+                console.log(title)
                 return {title, url, author, cover} as SearchBook
             })
+            console.log(books.length)
             res.json({books})
         } )
     } else {

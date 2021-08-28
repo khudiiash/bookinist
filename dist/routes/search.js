@@ -15,14 +15,14 @@ exports.default = express_1.default.Router().post('/', (req, res) => {
             const ORIGIN = 'https://www.litres.ru';
             const books = $('div[data-type="art"]').toArray().map((item, i) => {
                 var _a;
-                if ($(item).find('.art-item__name art-item__name_audio').length)
-                    return null;
                 const title = $(item).find('.art-item__name a').first().text();
                 const url = ORIGIN + $(item).find('.art-item__name a').first().attr('href');
                 const author = $(item).find('.art-item__author_label').first().text();
                 const cover = (_a = $(item).find('img.cover_img').first().attr('src')) === null || _a === void 0 ? void 0 : _a.replace('cover_120', 'cover_330');
+                console.log(title);
                 return { title, url, author, cover };
             });
+            console.log(books.length);
             res.json({ books });
         });
     }
