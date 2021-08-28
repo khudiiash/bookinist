@@ -19,10 +19,9 @@ exports.default = express_1.default.Router().post('/', (req, res) => {
                 const url = ORIGIN + $(item).find('.art-item__name a').first().attr('href');
                 const author = $(item).find('.art-item__author_label').first().text();
                 const cover = (_a = $(item).find('img.cover_img').first().attr('src')) === null || _a === void 0 ? void 0 : _a.replace('cover_120', 'cover_330');
-                console.log(title);
+                console.log({ title, url, author, cover });
                 return { title, url, author, cover };
             });
-            console.log(books.length);
             res.json({ books });
         });
     }
