@@ -51,7 +51,7 @@ export default defineComponent({
   text-align: left;
   font-weight: 600;
   width: 11vw;
-  height: calc(10vw * .75);
+  height: calc(11vw * .75);
   margin: 20px 0;
   border-bottom: 1px solid rgba(255, 255, 255, .1);
   padding: 0 0 14px 0;
