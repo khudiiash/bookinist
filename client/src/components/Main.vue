@@ -3,7 +3,7 @@
     <div class="main-header">
       <h1>Bookinist</h1>
       <form v-on:submit.prevent v-on:input="input">
-          <input id='query'>
+          <input autocomplete="off" id='query'>
       </form>
     </div>
     <Loading/>
