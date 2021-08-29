@@ -65,7 +65,6 @@ export default defineComponent({
   background: rgba(0, 0, 0, 0.7);
   color: rgba(255, 255, 255, 1);
   border-color: inherit;
-
 }
 
 .author-header {

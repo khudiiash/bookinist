@@ -17,7 +17,7 @@ function authorMatch(a:string,b:string):boolean {
     return A.some(w => B.some(bw => w === bw))
 }
 
-function deleteFiles(title: string, formats: string[], time: number = 60 * 60) { // Delete in 60 minutes
+function deleteFiles(title: string, formats: string[], time: number = 60 * 10) { // Delete in 10 minutes
     setTimeout(() => {
         for (let format of formats) {
             fs.unlink(path.join(__dirname, '..', 'files', `${title}.${format}`), () => console.log(`${path.join(__dirname, '..', 'files', `${title}.${format}`)} is deleted`))

@@ -16,8 +16,6 @@
 <script lang='ts'>
 import { watchEffect, defineComponent } from 'vue';
 import store from '../store'
-import axios from 'axios'
-import gsap from 'gsap'
 
 export default defineComponent({
     name: 'Reviews',
@@ -27,6 +25,19 @@ export default defineComponent({
     mounted() {
          watchEffect(() => {
            if (!store.state.book.reviews?.length) return
+           setTimeout(() => {
+                const reviews = Array.from(document.querySelectorAll('.reviews-item-text'))
+                reviews.map((r:any) => {
+                    r.onmouseover = function() {
+                        r.style.height = r.scrollHeight + 'px'
+                        r.parentNode.style.height = r.scrollHeight + 60 + 'px'
+                    }
+                    r.onmouseleave = function() {
+                        r.style.height ='140px'
+                        r.parentNode.style.height = '200px'
+                    }
+                })
+           }, 10)
          })
     }
 })
@@ -65,6 +76,7 @@ export default defineComponent({
     margin: 10px 5px;
     cursor: pointer;
     border-radius: 3px;
+    transition: .5s;
 
 }
 
@@ -90,6 +102,7 @@ export default defineComponent({
     mask-image: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 10%, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%);;
     -webkit-mask-mode: alpha;
     mask-mode: alpha;
+    transition: .5s;
 
 }
 .reviews-title {

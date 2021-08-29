@@ -57,7 +57,7 @@ export default defineComponent({
 
     gsap.timeline()
       .from('input', 1, {clipPath: 'inset(0 50% 0 50%)'})
-      .from('.main-header', 1, {y: 15, opacity: 0})
+      .from('.main-header h1', 1, {y: 15, opacity: 0})
 
     if (container) {
         container.addEventListener('scroll', function() {

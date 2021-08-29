@@ -50,9 +50,9 @@ export default defineComponent({
   flex-direction: row;
   text-align: left;
   font-weight: 600;
-  width: 200px;
+  width: 11vw;
+  height: calc(10vw * .75);
   margin: 20px 0;
-  height: 150px;
   border-bottom: 1px solid rgba(255, 255, 255, .1);
   padding: 0 0 14px 0;
   pointer-events: auto;
@@ -79,5 +79,11 @@ export default defineComponent({
 }
 .book-author {
     font-size: 8px;
+}
+
+@media screen and (max-width: 600px) {
+    .author-book { width: 47vw; height: calc(47vw * .75)}
+    .book-title {font-size: 14px;}
+    .book-author {font-size: 9px;}
 }
 </style>

@@ -19,7 +19,6 @@ export default defineComponent({
         watchEffect(() => {
            if (store.state.info && Object.keys(store.state.info).length) {
                setTimeout(() => {
-                   console.log('info')
                    gsap.timeline()
                     .fromTo('.info-key', 1, {clipPath: 'inset(0 100% 0 0)'}, {clipPath: 'inset(0 0% 0 0)', stagger: .1})
                     .fromTo('.info-value', 1, {clipPath: 'inset(0 100% 0 0)'}, {clipPath: 'inset(0 0% 0 0)', stagger: .1}, '<.3')

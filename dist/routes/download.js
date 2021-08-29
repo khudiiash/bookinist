@@ -37,7 +37,7 @@ function authorMatch(a, b) {
     const B = b.toLowerCase().replace(/[^a-zA-Zа-яА-Я\s]|\n/g, '').split(' ').filter(w => w.length > 1);
     return A.some(w => B.some(bw => w === bw));
 }
-function deleteFiles(title, formats, time = 60 * 60) {
+function deleteFiles(title, formats, time = 60 * 10) {
     setTimeout(() => {
         for (let format of formats) {
             fs_1.default.unlink(path_1.default.join(__dirname, '..', 'files', `${title}.${format}`), () => console.log(`${path_1.default.join(__dirname, '..', 'files', `${title}.${format}`)} is deleted`));
