@@ -71,12 +71,10 @@ export default defineComponent({
 
 @media screen and (max-width: 600px) {
   .similars {
+    width: 100vw;
     flex-wrap: nowrap;
-      -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 10%, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%);;
-      mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 10%, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%);;
-      -webkit-mask-mode: alpha;
-      mask-mode: alpha;
   }
+  .similars-header {  margin-left: 20px;}
 
 }
 

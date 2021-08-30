@@ -180,7 +180,7 @@ export default defineComponent({
     display: flex;
     align-items: center;
     justify-content: left;
-    font-size: 30px;
+    font-size: 26px;
     height: 30px;
     margin-left: 0;
     width: 100%;
@@ -207,7 +207,12 @@ export default defineComponent({
 
 @media screen and (max-width: 600px) {
     .author {
-        padding-left: 4vw;
+        padding: 0 5vw;
+    }
+    .author-bio {width: 100%}
+    .author-books-header {justify-content: center;}
+    .author-books {
+        border-left: 1px solid #2c3e5049;
     }
 }
 </style>

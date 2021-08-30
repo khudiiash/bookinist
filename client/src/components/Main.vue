@@ -7,8 +7,19 @@
       </form>
     </div>
     <Loading/>
-    <div class='search-result'>
+    <div class='search-result'  v-if="!isMobile">
       <div class='search-column' v-for="(n,index) in [1,2,3,4]" :key="n"> <SearchItem v-for="(book, i) in eachNth(store.state.searchResult, index, 4)"
+          :key="i"
+          :title="book.title"
+          :author="book.author"
+          :cover="book.cover"
+          :url="book.url"
+          :id=" store.state.searchResult.indexOf(book)"
+          :index="i"
+        /></div>
+   </div>
+  <div class='search-result'  v-if="isMobile">
+      <div class='search-column'><SearchItem v-for="(book, i) in store.state.searchResult"
           :key="i"
           :title="book.title"
           :author="book.author"
@@ -74,7 +85,8 @@ export default defineComponent({
   },
   data() {
     return {
-      backButton: require('../assets/backButton.png')
+      backButton: require('../assets/backButton.png'),
+      isMobile: window.innerWidth < window.innerHeight
     }
   },
   components: {
@@ -112,10 +124,12 @@ export default defineComponent({
 .main {
   display: flex;
   height: 100vh;
+  width: 100vw;
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  overflow: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .main-header {

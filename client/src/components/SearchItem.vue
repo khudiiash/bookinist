@@ -91,6 +91,8 @@ rect {
 }
 @media screen and (max-width: 600px) {
     .search-item {
+        width: 65vw;
+        height: calc(65vw * 1.4);
         margin: 30px auto;
     }
 }

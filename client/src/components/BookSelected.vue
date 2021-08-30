@@ -80,9 +80,9 @@ export default defineComponent({
 }
 
 @media screen and (max-width: 600px) {
-    .book-selected {flex-direction: column; }
+    .book-selected {flex-direction: column;}
     .section {width: 100vw}
-    .center {order: 1}
+    .center {order: 1; padding: 0}
     .right {order: 2; margin-top: 5vh; box-shadow: none;}
     .left {order: 3; margin-top: 0; box-shadow: none;}
 }

@@ -189,8 +189,8 @@ export default defineComponent({
 @media screen and (max-width: 600px) {
     .loading {
         right: 10px;
-        top: 0px;
-        bottom: 0;
+        top: 10px;
+        transform-origin: 100% 0%;
         transform: scale(.5);
     }
 }

@@ -82,8 +82,10 @@ export default defineComponent({
 }
 
 @media screen and (max-width: 600px) {
-    .author-book { width: 47vw; height: calc(47vw * .75)}
-    .book-title {font-size: 14px;}
-    .book-author {font-size: 9px;}
+    .author-book { width: 44vw; height: calc(44vw * 1.2); margin: 20px 0 0}
+    .book-title {font-size: 10px;}
+    .book-author {font-size: 8px;}
+    .book-text {display: none}
+    .book-cover {width: 80%;margin: 0 auto;}
 }
 </style>

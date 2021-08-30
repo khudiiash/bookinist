@@ -46,7 +46,6 @@ export default defineComponent({
 <style scoped>
 
 .reviews {
-    left: 350px;
     height: fit-content;
     margin-top: 4vh;
     font-size: 14px;
@@ -116,5 +115,11 @@ export default defineComponent({
    margin-left: 10px;
    white-space: nowrap;
    pointer-events: none;
+}
+
+@media screen and (max-width: 600px) {
+    .reviews-container {
+            padding-left: 10px;
+    }
 }
 </style>

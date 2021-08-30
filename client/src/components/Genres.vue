@@ -61,7 +61,6 @@ export default defineComponent({
 
 .genres {
     width: 95%;
-    left: 350px;
     height: fit-content;
     margin-top: 4vh;
     font-size: 14px;
@@ -103,5 +102,14 @@ export default defineComponent({
    margin-left: 10px;
    white-space: nowrap;
    pointer-events: none;
+}
+
+@media screen and (max-width: 600px) {
+        .genres {
+                width: 100%;
+        }
+        .genres-container {
+            padding-left: 10px;
+        }
 }
 </style>

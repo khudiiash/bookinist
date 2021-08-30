@@ -77,4 +77,14 @@ export default defineComponent({
     text-align: left;
 
 }
+
+@media screen and (max-width: 600px) {
+    .info {
+        margin-left: 10px;
+    }
+    .info-key {
+        margin-left: 10px;
+    }
+    
+}
 </style>

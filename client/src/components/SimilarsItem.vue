@@ -102,6 +102,12 @@ rect {
 @media screen and (max-width: 600px) {
   .similars-item {
     flex-shrink: 0;
+    width: 40vw;
+    height: calc(40vw * 1.4);
+    margin: 6px;
+  }
+  .similars-item:first-child {
+      margin-left: 20px;
   }
 
 }
