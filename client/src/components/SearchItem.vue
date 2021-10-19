@@ -41,9 +41,6 @@ export default defineComponent({
           store.state.isLoading = true
           if (this.url && this.title && this.cover && this.author) 
           api.select({url: this.url as string, title: this.title as string, cover: this.cover as string, author: this.author as string})
-          gsap.timeline()
-            .to(`.search-result`, .2, {autoAlpha: 0}, '<')
-            .to('.search-result', 0, {height: 0})
       }
   }
 })

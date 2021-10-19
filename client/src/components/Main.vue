@@ -1,14 +1,18 @@
 <template>
   <div class="main">
     <div class="main-header">
+      <div class='back' @click='back'>&#8592; BACK</div>
       <h1>Bookinist</h1>
       <form v-on:submit.prevent v-on:input="input">
           <input autocomplete="off" id='query'>
       </form>
     </div>
+    <div class="tags">
+      <div class="tag" @click="searchTag" v-for="tag in randomTags" :key="tag">{{tag}}</div>
+    </div>
     <Loading/>
     <div class='search-result'  v-if="!isMobile">
-      <div class='search-column' v-for="(n,index) in [1,2,3,4]" :key="n"> <SearchItem v-for="(book, i) in eachNth(store.state.searchResult, index, 4)"
+      <div class='search-column' v-for="(n,index) in [1,2,3]" :key="n"> <SearchItem v-for="(book, i) in eachNth(store.state.searchResult, index, 4)"
           :key="i"
           :title="book.title"
           :author="book.author"
@@ -25,7 +29,7 @@
           :author="book.author"
           :cover="book.cover"
           :url="book.url"
-          :id=" store.state.searchResult.indexOf(book)"
+          :id="store.state.searchResult.indexOf(book)"
           :index="i"
         /></div>
    </div>
@@ -45,6 +49,7 @@ import SearchItem from './SearchItem.vue'
 import Loading from './Loading.vue'
 import {Gradient} from '../libs/gradient'
 import eachNth from '../utils/eachNth'
+import randomArrayItems from '../utils/randomArrayItems'
 
 let searchTimeout: ReturnType<typeof setTimeout>;
 
@@ -52,7 +57,8 @@ let searchTimeout: ReturnType<typeof setTimeout>;
 export default defineComponent({
   name: 'Main',
   setup() {
-      return { store, eachNth }
+      const randomTags = randomArrayItems(store.state.tags, 8)
+      return { store, eachNth, randomTags }
   },
   mounted() {
     const container =   document.querySelector('.search-result') as HTMLInputElement
@@ -69,6 +75,8 @@ export default defineComponent({
     gsap.timeline()
       .from('input', 1, {clipPath: 'inset(0 50% 0 50%)'})
       .from('.main-header h1', 1, {y: 15, opacity: 0})
+      .from('.tag', {scale: 0, stagger: .05})
+
 
     if (container) {
         container.addEventListener('scroll', function() {
@@ -98,6 +106,8 @@ export default defineComponent({
     input: () => {
       const input = document.getElementById('query') as HTMLInputElement
       store.setSearchResult([])
+
+      if (gsap.getProperty('.tag', 'scale')) gsap.to('.tag', {scale: 0, stagger: .01})
       if (gsap.getProperty('.search-result', 'display') === 'none') gsap.set('.search-result', {display: 'flex'})
       if (!/[a-zA-Zа-яА-Я]/.test(input.value)) store.state.isLoading = false
       if (store.state.book.title) store.clearBook()
@@ -109,9 +119,18 @@ export default defineComponent({
         api.search(input.value)
         store.state.isLoading = true
         store.state.shouldSearchAbort = false
-      }, 500)
-     
-  }
+      }, 500) 
+    },
+    back() {
+      store.state.timelines.showBook.reverse()
+      setTimeout(store.showSearchScreen, 1500)
+    },
+    searchTag(e: Event) {
+        const input = document.getElementById('query') as HTMLInputElement
+        const tag = e.target as HTMLElement
+        input.value = tag ? tag.innerText : ''
+        this.input()
+    } 
 }
 });
 </script>
@@ -130,6 +149,24 @@ export default defineComponent({
   flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+.back {
+    width: 25vw;
+    font-family: 'Playfair Display', sans-serif;
+    font-size: 18px;
+    width: 100px;
+    height: 30px;
+    margin-left: -5vw;
+    margin-top: -40px;
+    color: #fff;
+    background: #111;
+    border-radius: 0px 0px 8px 8px;
+    border: 1px solid rgba(17, 17, 17, 0.3);
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(-100px);
+
 }
 
 .main-header {
@@ -159,6 +196,28 @@ input {
 }
 input:focus {
   outline: 0;
+}
+
+.tags {
+  position: fixed;
+  width: 33vw;
+  top: 50%;
+  height: 10%;
+  left: 33vw;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+.tag {
+  color: #fff;
+  margin: 3px;
+  background: linear-gradient(45deg, #1115, #5228);
+  border-radius: 10px;
+  font-family: 'Montserrat';
+  font-size: 12px;
+  padding: 8px;
+  cursor: pointer;
 }
 .search-result {
   height: fit-content;
@@ -206,7 +265,12 @@ input:focus {
     margin-top: 17vh;
   }
   input {
-      width: 330px;
+    width: 330px;
+  }
+  .tags {
+    position: fixed;
+    width: 80vw;
+    left: 10vw;
   }
 }
 

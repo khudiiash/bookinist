@@ -53,12 +53,14 @@ export default defineComponent({
     opacity: 0;
 }
 
+
 .left {
     width: 25vw;
     height: fit-content;
     min-height: 117vh;
-    margin-top: -17vh;
-    box-shadow: 0 117vh 0 rgba(0, 0, 0, 0.7);
+    position: relative;
+    top: -17vh;
+    box-shadow: 0 117vh 0 rgba(0, 0, 0, 0.7), 0 -117vh 0 rgba(0, 0, 0, 0.7);
 }
 .center {
     width: 50vw;
@@ -72,8 +74,9 @@ export default defineComponent({
     width: 25vw;
     background: rgba(0,0,0,.7);
     color: white;
-    margin-top: -17vh;
-    box-shadow: 0 117vh 0 rgba(0,0,0,.7);
+    position: relative;
+    top: -17vh;
+    box-shadow: 0 117vh 0 rgba(0,0,0,.7), 0 -117vh 0 rgba(0,0,0,.7);
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     overflow: hidden;
@@ -83,8 +86,8 @@ export default defineComponent({
     .book-selected {flex-direction: column;}
     .section {width: 100vw}
     .center {order: 1; padding: 0}
-    .right {order: 2; margin-top: 5vh; box-shadow: none;}
-    .left {order: 3; margin-top: 0; box-shadow: none;}
+    .right {order: 2; margin-top: 22vh; box-shadow: none;}
+    .left {order: 3; margin-top: 0; box-shadow: 0 117vh 0 rgba(0,0,0,.7);}
 }
 
 </style>

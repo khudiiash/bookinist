@@ -77,7 +77,6 @@ export default defineComponent({
   padding: 0 2vw;
   color: #000;
   width: 40vw;
-  overflow-x: scroll;
 }
 
 .book-cover {
@@ -217,6 +216,11 @@ export default defineComponent({
       left: calc(50% - 5px);
       top: -10px;
       transform: rotate(-45deg);
+  }
+}
+@media screen and (max-width: 600px) {
+  .book {
+      overflow-x: scroll;
   }
 }
 </style>

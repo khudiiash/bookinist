@@ -12,6 +12,16 @@ const state = reactive({
    downloads: null,
    isLoading: false as boolean,
    shouldSearchAbort: false as boolean,
+   tags: [
+    "классика", "Гарри Поттер", "Cтивен Кинг","детектив", "для детей", "приключения",
+    "Шерлок Холмс", "Макс Фрай", "фентези", "Маленький Принц", "про любовь", "2020","о войне",
+    "Уильям Шекспир", "Дом, в котором", "Над Пропастью Во Ржи", "Харуки Мураками","роман",
+    "Сталкер", "Пикник на обочине", "Виктор Пелевин", "Fight Club", "William Shakespeare",
+    "Oliver Twist", "Kill the Mockingbird", "Поток сознания", "Тошнота", "Экзюпери", "детская литература",
+    "иронический детектив", "Два капитана", "Вебер", "Приключенческий роман", "Фентази", "триллер",
+    "про маньяков и убийц", "Книги про космос", "попаденцы", "альтернативная история", "классический детектив",
+    "триллер", "Стендаль", "Набоков", "Игры в которые играют люди", "Дефо", "Братья Карамазовы", "Франк Тилье"
+  ],
    timelines: {} as any
 })
 
@@ -23,10 +33,11 @@ const actions = {
       state.timelines.showBook = gsap.timeline()
          .to('.main', .5, {scrollTo: {y: 0}})
          .fromTo('.book-selected', {autoAlpha: 0}, {autoAlpha: 1, opacity: 1, scale: 1})
-         .fromTo('.book-cover', .6, {opacity: 0, y: 35}, {scale: 1, opacity: 1, y: 0}, '<.1')
+         .fromTo('.book-selected .book-cover', .6, {opacity: 0, y: 35}, {scale: 1, opacity: 1, y: 0}, '<.1')
          .fromTo('.author-photo', .6, {scale: 0}, {scale: 1, opacity: 1, ease: 'back'}, '<.1')
          .fromTo(['.author-name', '.book-title', '.book-year', '.info-header', '.similars-header'], 1, {clipPath: 'inset(0 100% 0 0)'}, {clipPath: 'inset(0 0% 0 0)', stagger: 0}, '<.1')
          .fromTo('.author-bio, .book-description', .6, {opacity: 0, y: 15}, { scale: 1, opacity: 1, y: 0, stagger: .1}, '<.1')
+         .to('.back', {y: 0, opacity: 1}, '<')
     },
     hideBookScreen() {
       return state.timelines.hideBookScreen = gsap.timeline()
@@ -41,11 +52,11 @@ const actions = {
           .to('.main', .5, {scrollTo: {y: 0}})
           .set('.search-result', {display: 'flex', autoAlpha: 1}, '<')
           .set('.search-column', {opacity: 1})
-          .fromTo('.search-column', 1, {y: '100vh'}, {y: 0, ease: 'power2.out', stagger: .1})
+          .fromTo('.search-column', 1, {y: '100vh'}, {y: 0, opacity: 1, ease: 'power2.out', stagger: .1})
     },
     hideSearchScreen() {
         return state.timelines.hideSearch = gsap.timeline()
-          .set('.search-column', {opacity: 0})
+          .to('.search-column', {opacity: 0})
           .set('.search-result', {display: 'none'})
     },
     setAuthor(author: Author) {
