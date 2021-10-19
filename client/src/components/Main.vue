@@ -61,6 +61,7 @@ export default defineComponent({
       return { store, eachNth, randomTags }
   },
   mounted() {
+    console.log('Latest Version, Published October 19th, 2021')
     const container =   document.querySelector('.search-result') as HTMLInputElement
     const input = document.querySelector('#query') as HTMLInputElement
     const main = document.querySelector('.main') as HTMLInputElement
